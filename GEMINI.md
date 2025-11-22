@@ -8,3 +8,5 @@
 - [x] Implicit Intents: Basics (ACTION_VIEW)
 - [x] Implicit Intents: Package Visibility & <queries>
 - [x] Implicit Intents: Sharing Content (ACTION_SEND & Chooser)
+- [x] Intent Filters
+- [ ] Services

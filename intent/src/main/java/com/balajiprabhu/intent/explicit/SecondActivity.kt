@@ -6,8 +6,6 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,7 +29,16 @@ class SecondActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val message = intent.getStringExtra("message") ?: "No message received"
+        var message: String
+
+        if(intent?.action == Intent.ACTION_SEND && intent.type == "text/plain") {
+            message = intent.getStringExtra(Intent.EXTRA_TEXT) ?: "No message received"
+        } else {
+            message = intent.getStringExtra("message") ?: "No message received"
+        }
+
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+
 
         setContent {
             AndroidRefreshTheme {
