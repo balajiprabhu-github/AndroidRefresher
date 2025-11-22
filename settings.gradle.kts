@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "AndroidRefresh"
 include(":app")
 include(":intent")
+include(":services")
