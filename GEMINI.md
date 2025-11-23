@@ -9,4 +9,6 @@
 - [x] Implicit Intents: Package Visibility & <queries>
 - [x] Implicit Intents: Sharing Content (ACTION_SEND & Chooser)
 - [x] Intent Filters
-- [ ] Services
+- [x] Services: Basics
+- [x] Services: Foreground Services
+- [ ] Services: Bound Services

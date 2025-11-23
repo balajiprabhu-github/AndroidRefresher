@@ -21,7 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.balajiprabhu.intent.explicit.SecondActivity
+import com.balajiprabhu.intent.intent.SecondActivity
 import com.balajiprabhu.intent.ui.theme.AndroidRefreshTheme
 import androidx.core.net.toUri
 
