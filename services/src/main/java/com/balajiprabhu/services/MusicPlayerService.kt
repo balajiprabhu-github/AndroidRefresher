@@ -5,14 +5,18 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.media.MediaPlayer
+import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.core.app.NotificationCompat
 
 class MusicPlayerService : Service() {
+    inner class MusicBinder : Binder() {
+        fun getService(): MusicPlayerService {
+            return this@MusicPlayerService
+        }
+    }
     private val TAG = "MusicPlayerService"
     private val CHANNEL_ID = "music_player_channel"
     private val NOTIFICATION_ID = 1
@@ -20,7 +24,7 @@ class MusicPlayerService : Service() {
     private lateinit var mediaPlayer: MediaPlayer
     
     override fun onBind(intent: Intent?): IBinder? {
-        return null
+        return MusicBinder()
     }
 
     override fun onCreate() {
@@ -66,5 +70,12 @@ class MusicPlayerService : Service() {
             val manager = getSystemService(NotificationManager::class.java)
             manager.createNotificationChannel(serviceChannel)
         }
+    }
+
+    fun getPlaybackPosition(): Int {
+        if(!this::mediaPlayer.isInitialized && !mediaPlayer.isPlaying) {
+            return 0
+        }
+        return mediaPlayer.currentPosition
     }
 }
