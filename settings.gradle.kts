@@ -23,3 +23,4 @@ rootProject.name = "AndroidRefresh"
 include(":app")
 include(":intent")
 include(":services")
+include(":pendingintent")
