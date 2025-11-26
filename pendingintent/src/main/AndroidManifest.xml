@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Required for Android 13+ (API 33+) to show notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -8,17 +11,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidRefresh">
+        
+        <!-- Launcher Activity - Shows button to send notification -->
         <activity
-            android:name=".MainActivity"
+            android:name=".NotificationSenderActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.AndroidRefresh">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        
+        
+        <!-- Target Activity - Opens when notification is tapped -->
+        <activity
+            android:name=".NotificationTargetActivity"
+            android:exported="false" />
+        
+        <!-- Demo Activity - For learning notification ID behavior -->
+        <activity
+            android:name=".NotificationIdDemoActivity"
+            android:exported="true"
+            android:label="Notification ID Demo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+            
     </application>
 
 </manifest>

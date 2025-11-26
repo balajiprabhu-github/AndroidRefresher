@@ -11,4 +11,6 @@
 - [x] Intent Filters
 - [x] Services: Basics
 - [x] Services: Foreground Services
-- [ ] Services: Bound Services
+- [x] Services: Bound Services
+- [x] PendingIntent: Concepts & Notifications
+- [x] BroadcastReceiver: Static & Dynamic
