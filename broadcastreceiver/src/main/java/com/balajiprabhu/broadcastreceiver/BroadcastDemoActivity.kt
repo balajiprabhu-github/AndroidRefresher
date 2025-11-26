@@ -1,6 +1,5 @@
 package com.balajiprabhu.broadcastreceiver
 
-import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
@@ -37,6 +36,9 @@ class BroadcastDemoActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     BroadcastDemoScreen(
                         isAirplaneModeOn = isAirplaneModeOn,
+                        onNavigateToStatic = {
+                            startActivity(Intent(this, StaticReceiverDemoActivity::class.java))
+                        },
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -52,7 +54,7 @@ class BroadcastDemoActivity : ComponentActivity() {
         
         // Android 13+ requires explicit export flag
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            registerReceiver(airplaneModeReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
+            registerReceiver(airplaneModeReceiver, filter, RECEIVER_NOT_EXPORTED)
         } else {
             registerReceiver(airplaneModeReceiver, filter)
         }
@@ -68,6 +70,7 @@ class BroadcastDemoActivity : ComponentActivity() {
 @Composable
 fun BroadcastDemoScreen(
     isAirplaneModeOn: Boolean,
+    onNavigateToStatic: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -134,5 +137,14 @@ fun BroadcastDemoScreen(
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.outline
         )
+        
+        Spacer(modifier = Modifier.height(48.dp))
+        
+        Button(
+            onClick = onNavigateToStatic,
+            modifier = Modifier.fillMaxWidth(0.8f)
+        ) {
+            Text("Learn about Static Receivers →")
+        }
     }
 }
