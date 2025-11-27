@@ -27,7 +27,16 @@
         <activity
             android:name=".StaticReceiverDemoActivity"
             android:exported="false" />
-        
+        <activity
+            android:name=".custom.BroadcastSenderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".custom.BroadcastReceiverActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ordered.OrderedBroadcastDemoActivity"
+            android:exported="false" />
+
         <!-- STATIC BROADCAST RECEIVER -->
         <!-- This receiver is registered in the manifest and will be triggered by the system -->
         <receiver

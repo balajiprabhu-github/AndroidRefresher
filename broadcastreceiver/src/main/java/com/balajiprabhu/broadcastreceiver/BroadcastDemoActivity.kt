@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.balajiprabhu.broadcastreceiver.custom.BroadcastSenderActivity
 
 class BroadcastDemoActivity : ComponentActivity() {
 
@@ -38,6 +39,9 @@ class BroadcastDemoActivity : ComponentActivity() {
                         isAirplaneModeOn = isAirplaneModeOn,
                         onNavigateToStatic = {
                             startActivity(Intent(this, StaticReceiverDemoActivity::class.java))
+                        },
+                        onNavigateToCustom = {
+                            startActivity(Intent(this, BroadcastSenderActivity::class.java))
                         },
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -71,6 +75,7 @@ class BroadcastDemoActivity : ComponentActivity() {
 fun BroadcastDemoScreen(
     isAirplaneModeOn: Boolean,
     onNavigateToStatic: () -> Unit,
+    onNavigateToCustom: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -145,6 +150,28 @@ fun BroadcastDemoScreen(
             modifier = Modifier.fillMaxWidth(0.8f)
         ) {
             Text("Learn about Static Receivers →")
+        }
+
+        Button(
+            onClick = onNavigateToCustom,
+            modifier = Modifier.fillMaxWidth(0.8f)
+        ) {
+            Text("Custom Broadcasts →")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        val context = androidx.compose.ui.platform.LocalContext.current
+        Button(
+            onClick = { 
+                context.startActivity(Intent(context, com.balajiprabhu.broadcastreceiver.ordered.OrderedBroadcastDemoActivity::class.java))
+            },
+            modifier = Modifier.fillMaxWidth(0.8f),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.secondary
+            )
+        ) {
+            Text("Ordered Broadcasts (Spam Filter) →")
         }
     }
 }
