@@ -8,6 +8,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidRefresh">
+
+        <!-- THE CONTENT PROVIDER DECLARATION -->
+        <!-- authorities: MUST match the string in your Contract class -->
+        <!-- exported: Must be true if you want OTHER apps to read it -->
+        <provider
+            android:name=".DictionaryProvider"
+            android:authorities="com.balajiprabhu.contentprovider.dictionary"
+            android:exported="true"
+            android:enabled="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
