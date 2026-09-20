@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.AndroidRefresh" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- AppCompatActivity requires an AppCompat theme (or descendant). -->
+    <style name="Theme.AndroidRefresh" parent="Theme.AppCompat.Light.NoActionBar" />
 </resources>

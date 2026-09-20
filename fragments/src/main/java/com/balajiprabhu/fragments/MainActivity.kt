@@ -1,47 +1,29 @@
 package com.balajiprabhu.fragments
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.balajiprabhu.fragments.ui.theme.AndroidRefreshTheme
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 
-class MainActivity : ComponentActivity() {
+/** Hosts ViewPager2, which displays one Fragment per page. */
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            AndroidRefreshTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+        Log.d(LOG_TAG, "MainActivity.onCreate")
+        setContentView(R.layout.activity_main)
+
+        val viewPager = findViewById<ViewPager2>(R.id.viewPager)
+        // FragmentStateAdapter creates, saves, and restores Fragment pages.
+        viewPager.adapter = LessonPagerAdapter(this)
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                Log.d(LOG_TAG, "ViewPager2.onPageSelected: position=$position")
             }
-        }
+        })
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AndroidRefreshTheme {
-        Greeting("Android")
+    private companion object {
+        const val LOG_TAG = "FragmentLesson"
     }
 }
